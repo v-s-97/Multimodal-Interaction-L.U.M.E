@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+  <script src="/webgazer.js"></script>
+  <script type="module" src="./app.js"></script>
+</head>
+
+<body data-screen="landing">
+  <section id="landing-page" class="landing-page" aria-labelledby="landing-title">
+    <div class="landing-stage">
+      <div class="landing-stage__glow landing-stage__glow--left" aria-hidden="true"></div>
+      <div class="landing-stage__glow landing-stage__glow--right" aria-hidden="true"></div>
+
+      <div class="landing-stage__art" aria-hidden="true">
+        <div class="hero-sheet hero-sheet--rear"></div>
+        <div class="hero-sheet hero-sheet--mid"></div>
+        <div class="hero-sheet hero-sheet--front"></div>
+      </div>
+
+      <div class="landing-stage__content">
+        <div class="brand-lockup">
+          <span class="brand-mark">LUME</span>
+          <span class="brand-subtitle">Adaptive reading companion</span>
+        </div>
+        <div class="hero-card">
+          <h1 id="landing-title">Capisce quando ti trovi in difficoltà intervenendo solo se serve</h1>
+          <p class="landing-lead">
+            Lume organizza il testo in paragrafi leggibili, segue il ritmo dello sguardo
+            e propone una spiegazione breve soltanto quando rileva un punto di difficoltà.
+          </p>
+          <button id="try-now-btn" class="hero-cta" type="button">Try now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="landing-story">
+      <article class="story-card">
+        <!-- <span class="story-card__eyebrow">01</span> -->
+        <h2>Testo più ordinato</h2>
+        <p>Ogni brano viene spezzato in paragrafi chiari e ampi, pensati per una lettura più stabile.</p>
+      </article>
+
+      <article class="story-card">
+        <!-- <span class="story-card__eyebrow">02</span> -->
+        <h2>Tracking discreto</h2>
+        <p>La webcam lavora in background: l’esperienza resta pulita e i controlli tecnici finiscono nel pannello Debug.</p>
+      </article>
+
+      <article class="story-card">
+        <!-- <span class="story-card__eyebrow">03</span> -->
+        <h2>Supporto contestuale</h2>
+        <p>Quando un passaggio sembra difficile, compare una spiegazione sintetica senza interrompere l’intera sessione.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="workspace-page" class="workspace-page" hidden aria-labelledby="workspace-title" data-theme="cream">
+    <header class="reading-topbar">
+      <div class="reading-topbar__identity">
+        <button id="back-home-btn" class="reading-home-link" type="button" aria-label="Torna alla home">Lume</button>
+        <span class="reading-topbar__dot" aria-hidden="true"></span>
+        <span class="reading-topbar__label">Lettura</span>
+        <span id="reader-progress-label" class="reading-topbar__status">Prepara il testo</span>
+      </div>
+
+      <div class="reading-topbar__controls" aria-label="Preferenze di lettura">
+        <div class="theme-control" aria-label="Tema">
+          <span class="reading-control-label">Tema</span>
+          <div class="theme-control__swatches" role="group" aria-label="Seleziona il tema">
+            <button class="theme-swatch theme-swatch--light" type="button" data-theme-option="light" aria-label="Tema chiaro"></button>
+            <button class="theme-swatch theme-swatch--cream" type="button" data-theme-option="cream" aria-label="Tema crema"></button>
+            <button class="theme-swatch theme-swatch--dark" type="button" data-theme-option="dark" aria-label="Tema scuro"></button>
+          </div>
+        </div>
+
+        <div class="reading-control-separator" aria-hidden="true"></div>
+
+        <div class="font-size-control" aria-label="Dimensione testo">
+          <span class="reading-control-label">Testo</span>
+          <div class="font-size-control__pill">
+            <button id="reader-font-decrease-btn" type="button" class="font-size-control__button" aria-label="Riduci dimensione testo">A−</button>
+            <output id="reader-font-size-value" for="reader-font-size-slider">28 px</output>
+            <button id="reader-font-increase-btn" type="button" class="font-size-control__button font-size-control__button--increase" aria-label="Aumenta dimensione testo">A+</button>
+            <input
+              id="reader-font-size-slider"
+              class="visually-hidden"
+              type="range"
+              min="18"
+              max="48"
+              step="2"
+              value="28"
+              aria-label="Regola la dimensione del testo nella lettura"
+            />
+          </div>
+        </div>
+
+        <button id="focus-mode-toggle-btn" class="focus-mode-control" type="button" role="switch" aria-checked="true">
+          <span class="focus-mode-control__switch" aria-hidden="true"><span></span></span>
+          <span>Focus paragrafo</span>
+        </button>
+
+        <div id="reader-tracking-status" class="eye-tracker-status is-inactive" role="status">
+          <span class="eye-tracker-status__dot" aria-hidden="true"></span>
+          <span id="reader-tracking-status-label">Eye-tracker spento</span>
+        </div>
+
+        <button id="reader-edit-text-btn" class="edit-text-button" type="button">← Modifica testo</button>
+      </div>
+    </header>
+
+    <main class="workspace-layout">
+      <section id="prepare-view" class="preparation-view" aria-labelledby="workspace-title">
+        <div class="preparation-view__intro">
+          <p class="workspace-kicker">Lume workspace</p>
+          <h1 id="workspace-title">Prepara la tua lettura</h1>
+          <p>Incolla il brano: la schermata di lettura conserverà paragrafi, eye-tracker e assistenza contestuale già presenti.</p>
+          <button
+            id="debug-toggle-btn"
+            class="preparation-debug-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="debug-panel"
+          >
+            Mostra strumenti tecnici
+          </button>
+        </div>
+
+        <section class="panel panel--composer" aria-labelledby="input-title">
+          <span class="panel-eyebrow">Testo</span>
+          <h2 id="input-title">Prepara la lettura</h2>
+          <p class="panel-copy">
+            Incolla il brano che vuoi leggere. Lume lo dividerà in paragrafi ampi
+            e attiverà l’assistenza quando rileva un punto di incertezza.
+          </p>
+
+          <label for="text-input" class="input-label">Testo di partenza</label>
+          <textarea
+            id="text-input"
+            class="text-input"
+            placeholder="Incolla qui il testo da leggere..."
+          ></textarea>
+
+          <div class="button-row button-row--primary">
+            <button id="render-text-btn" type="button">Prepara testo</button>
+            <button id="clear-text-btn" type="button">Svuota</button>
+          </div>
+
+          <p class="helper-text">
+            La calibrazione parte appena inizi la demo. Le spiegazioni appariranno
+            a margine del relativo paragrafo, solo quando il sistema rileva che richiede supporto.
+          </p>
+        </section>
+
+        <section id="debug-panel" class="panel panel--debug" hidden>
+          <span class="panel-eyebrow">Debug</span>
+          <h2>Strumenti tecnici</h2>
+          <p class="panel-copy">Controlli manuali e indicatori del tracking.</p>
+
+          <div class="status-grid">
+            <div class="status-item">
+              <span class="status-label">Webcam</span>
+              <span id="webcam-status" class="status-badge">spenta</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Tracking</span>
+              <span id="tracking-status" class="status-badge">fermo</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">AU4</span>
+              <span id="au4-status" class="status-badge">—</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">AU7</span>
+              <span id="au7-status" class="status-badge">—</span>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button id="start-tracking-btn" type="button" class="btn--primary">Avvia</button>
+            <button id="stop-tracking-btn" type="button" class="btn--danger">Ferma</button>
+            <button id="calibrate-btn" type="button">Calibra</button>
+          </div>
+
+          <div class="button-row">
+            <button id="export-log-btn" type="button">Scarica log</button>
+            <button id="reset-data-btn" type="button" class="btn--danger">Reset sessione</button>
+          </div>
+        </section>
+      </section>
+
+      <section id="reading-view" class="reader-stage" hidden aria-labelledby="reader-title">
+        <h2 id="reader-title" class="visually-hidden">Area di lettura</h2>
+        <div class="reading-progress" aria-hidden="true"><span id="reading-progress-fill"></span></div>
+        <div id="reader-scroll-area" class="reader-scroll-area" tabindex="0" aria-label="Contenuto di lettura">
+          <article id="reader-content" class="reader-content" aria-live="polite">
+            <div class="reader-placeholder">
+              <strong>Incolla un testo e premi “Prepara testo”.</strong>
+              <span>Qui comparirà la lettura organizzata in paragrafi.</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <div id="gaze-dot" class="gaze-dot" aria-hidden="true"></div>
+
+  <section id="calibration-layer" class="calibration-layer" aria-hidden="true">
+    <div class="calibration-box">
+      <span class="panel-eyebrow">Calibration</span>
+      <h2 id="calibration-title">Allinea lo sguardo</h2>
+      <p id="calibration-description">Guarda ogni punto e cliccalo 5 volte. Dopo passerai alla breve calibrazione del viso.</p>
+      <p id="calibration-status" class="calibration-status" aria-live="polite"></p>
+      <div class="calibration-actions">
+        <button id="close-calibration-btn" type="button">Chiudi</button>
+        <button id="retry-face-calibration-btn" type="button" hidden>Riprova calibrazione viso</button>
+      </div>
+    </div>
+    <div id="calibration-points" class="calibration-points"></div>
+  </section>
+</body>
+</html>
